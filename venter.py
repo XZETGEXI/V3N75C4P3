@@ -35,7 +35,12 @@ def main():
     printed = set()
     
     while True:
-        asyncio.run(venter(to_print, printed))
+        try:
+            asyncio.run(venter(to_print, printed))
+        except:
+            with open("vent_session.txt", "w") as f:
+                f.writelines(msg + '\n' for msg in printed)
+            break
         
 if __name__ == "__main__":
     main()
