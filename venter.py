@@ -1,4 +1,4 @@
-import os, time, asyncio, aiohttp, re
+import os, time, asyncio, aiohttp, re, random
 
 W, H = os.get_terminal_size()
 
@@ -19,7 +19,7 @@ async def retrieve(to_print, printed):
 async def print_msg(to_print, printed):
     while to_print:
         msg = to_print.pop(0)
-        printed.add(msg)
+        printed[msg] = "Ø"
         print(msg.center(W))
         await asyncio.sleep(1)
     
@@ -32,13 +32,13 @@ async def venter(to_print, printed):
 
 def main():
     to_print = []
-    printed = set()
+    printed = {}
     
     while True:
         try:
             asyncio.run(venter(to_print, printed))
         except:
-            with open("vent_session.txt", "w") as f:
+            with open(f"vent_session_{random.randint(0, 37543)}.txt", "w") as f:
                 f.writelines(msg + '\n' for msg in printed)
             break
         
