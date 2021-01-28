@@ -1,4 +1,4 @@
-import requests, os, time, asyncio, aiohttp, re
+import os, time, asyncio, aiohttp, re
 
 W, H = os.get_terminal_size()
 
